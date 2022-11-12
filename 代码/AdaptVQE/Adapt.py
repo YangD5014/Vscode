@@ -21,3 +21,5 @@ class AdaptVQE_Y(object):
         print('2次量子化后的哈密顿量为:\n')
         return self.problem_second_op
     
+    
+    
