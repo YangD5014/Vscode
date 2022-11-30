@@ -1,0 +1,51 @@
+INFO:qiskit_nature.second_q.drivers.pyscfd.pyscfdriver:PySCF kernel() converged: True, e(hf): -7.857144960203831
+INFO:qiskit_nature.second_q.drivers.pyscfd.pyscfdriver:HF Electronic dipole moment: [-5.13528156 -0.         -0.        ]
+INFO:qiskit_nature.second_q.drivers.pyscfd.pyscfdriver:Nuclear dipole moment: [3.21253441 0.         0.        ]
+INFO:qiskit_nature.second_q.drivers.pyscfd.pyscfdriver:Total dipole moment: [-1.92274715  0.          0.        ]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #1 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 0.14241981506347656 seconds.
+Found optimal point [-0.12577432]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #2 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 0.5355832576751709 seconds.
+Found optimal point [-0.1266283   0.05648795]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #3 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 0.9604678153991699 seconds.
+Found optimal point [-0.12733636  0.05402327  0.05422558]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #4 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 1.5420176982879639 seconds.
+Found optimal point [-0.1262631   0.05872487  0.05882966 -0.03334795]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #5 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 1.702880859375 seconds.
+Found optimal point [-0.1259614   0.05809761  0.05819739 -0.03150613 -0.02562125]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #6 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 2.389307737350464 seconds.
+Found optimal point [-0.12545066  0.05732538  0.05742093 -0.02979762 -0.02511969 -0.02513752]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #7 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 2.8857920169830322 seconds.
+Found optimal point [-0.12444148  0.05699578  0.06618646 -0.03548914 -0.02600059 -0.02601139
+ -0.04302825]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #8 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 5.074466943740845 seconds.
+Found optimal point [-0.12238641  0.06485991  0.06564014 -0.04053747 -0.02666449 -0.02667438
+ -0.03969142 -0.03745691]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #9 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 3.3579277992248535 seconds.
+Found optimal point [-0.12257742  0.0655131   0.06501053 -0.0405481  -0.02632903 -0.02633834
+ -0.04022379 -0.03749298 -0.0090324 ]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #10 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 3.9200611114501953 seconds.
+Found optimal point [-0.12255746  0.06522807  0.06589684 -0.04104887 -0.02628102 -0.02629042
+ -0.04146606 -0.0384343  -0.00694346 -0.00572047]
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #11 ---
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:AdaptVQE terminated successfully with a final maximum gradient: 0.0006003965885035621
+INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:The final energy is: -1.0556740354626828
