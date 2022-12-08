@@ -1,51 +1,404 @@
 INFO:qiskit_nature.second_q.drivers.pyscfd.pyscfdriver:PySCF kernel() converged: True, e(hf): -7.857144960203831
-INFO:qiskit_nature.second_q.drivers.pyscfd.pyscfdriver:HF Electronic dipole moment: [-5.13528156 -0.         -0.        ]
+INFO:qiskit_nature.second_q.drivers.pyscfd.pyscfdriver:HF Electronic dipole moment: [-5.13528156  0.         -0.        ]
 INFO:qiskit_nature.second_q.drivers.pyscfd.pyscfdriver:Nuclear dipole moment: [3.21253441 0.         0.        ]
 INFO:qiskit_nature.second_q.drivers.pyscfd.pyscfdriver:Total dipole moment: [-1.92274715  0.          0.        ]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #1 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
-INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 0.14241981506347656 seconds.
+INFO:官方adapt:--- Iteration #1 ---
+INFO:官方adapt:第1轮的梯度为:[(3.276606243447777e-08, {}), (0.0, {}), (0.0, {}), (4.472474043892838e-09, {}), (3.2766062395446494e-08, {}), (0.0, {}), (0.0, {}), (4.472474044543359e-09, {}), (-0.028307004925575144, {}), (0.0, {}), (0.0, {}), (0.071799876378881, {}), (0.0, {}), (-0.045788861299330616, {}), (0.0, {}), (0.0, {}), (0.0, {}), (0.0, {}), (-0.045788861299330616, {}), (0.0, {}), (0.071799876378881, {}), (0.0, {}), (0.0, {}), (-0.2502047803667309, {})]其中最大的为第23个,值为:(-0.2502047803667309, {})
+INFO:官方adapt:目前的op:[23]开始比较0.2502047803667309和0.001
+INFO:官方adapt:Alternating sequence found. Finishing.
+INFO:官方adapt:目前送给slover的数据如下:
+     ┌───────────────────┐
+q_0: ┤0                  ├
+     │                   │
+q_1: ┤1                  ├
+     │                   │
+q_2: ┤2                  ├
+     │                   │
+q_3: ┤3                  ├
+     │                   │
+q_4: ┤4                  ├
+     │  EvolvedOps(t[0]) │
+q_5: ┤5                  ├
+     │                   │
+q_6: ┤6                  ├
+     │                   │
+q_7: ┤7                  ├
+     │                   │
+q_8: ┤8                  ├
+     │                   │
+q_9: ┤9                  ├
+     └───────────────────┘
+初始值[0.0]ansatz_operator:[PauliSumOp(SparsePauliOp(['YZZZYXZZZY', 'XZZZYYZZZY', 'XZZZXXZZZY', 'YZZZXYZZZY', 'XZZZYXZZZX', 'YZZZYYZZZX', 'YZZZXXZZZX', 'XZZZXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0)]
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 0.13730072975158691 seconds.
 Found optimal point [-0.12577432]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #2 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
-INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 0.5355832576751709 seconds.
-Found optimal point [-0.1266283   0.05648795]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #3 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
-INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 0.9604678153991699 seconds.
-Found optimal point [-0.12733636  0.05402327  0.05422558]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #4 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
-INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 1.5420176982879639 seconds.
-Found optimal point [-0.1262631   0.05872487  0.05882966 -0.03334795]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #5 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
-INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 1.702880859375 seconds.
-Found optimal point [-0.1259614   0.05809761  0.05819739 -0.03150613 -0.02562125]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #6 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
-INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 2.389307737350464 seconds.
-Found optimal point [-0.12545066  0.05732538  0.05742093 -0.02979762 -0.02511969 -0.02513752]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #7 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
-INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 2.8857920169830322 seconds.
-Found optimal point [-0.12444148  0.05699578  0.06618646 -0.03548914 -0.02600059 -0.02601139
- -0.04302825]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #8 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
-INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 5.074466943740845 seconds.
-Found optimal point [-0.12238641  0.06485991  0.06564014 -0.04053747 -0.02666449 -0.02667438
- -0.03969142 -0.03745691]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #9 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
-INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 3.3579277992248535 seconds.
-Found optimal point [-0.12257742  0.0655131   0.06501053 -0.0405481  -0.02632903 -0.02633834
- -0.04022379 -0.03749298 -0.0090324 ]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #10 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:Alternating sequence found. Finishing.
-INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 3.9200611114501953 seconds.
-Found optimal point [-0.12255746  0.06522807  0.06589684 -0.04104887 -0.02628102 -0.02629042
- -0.04146606 -0.0384343  -0.00694346 -0.00572047]
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:--- Iteration #11 ---
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:AdaptVQE terminated successfully with a final maximum gradient: 0.0006003965885035621
-INFO:qiskit.algorithms.minimum_eigensolvers.adapt_vqe:The final energy is: -1.0556740354626828
+INFO:官方adapt:--- Iteration #2 ---
+INFO:官方adapt:第2轮的梯度为:[(0.008196253708631602, {}), (0.0, {}), (0.0, {}), (-0.00157361781799277, {}), (0.008196253708631585, {}), (0.0, {}), (0.0, {}), (-0.0015736178179928495, {}), (-0.021194869323520358, {}), (0.0, {}), (0.0, {}), (0.07653445626627405, {}), (0.0, {}), (-0.040133119555666945, {}), (0.0, {}), (0.0, {}), (0.0, {}), (0.0, {}), (-0.040133119555666945, {}), (0.0, {}), (0.07653445626627406, {}), (0.0, {}), (0.0, {}), (1.5263485144594371e-07, {})]其中最大的为第20个,值为:(0.07653445626627406, {})
+INFO:官方adapt:目前的op:[23, 20]开始比较0.07653445626627406和0.001
+INFO:官方adapt:Alternating sequence found. Finishing.
+INFO:官方adapt:目前送给slover的数据如下:
+     ┌────────────────────────┐
+q_0: ┤0                       ├
+     │                        │
+q_1: ┤1                       ├
+     │                        │
+q_2: ┤2                       ├
+     │                        │
+q_3: ┤3                       ├
+     │                        │
+q_4: ┤4                       ├
+     │  EvolvedOps(t[0],t[1]) │
+q_5: ┤5                       ├
+     │                        │
+q_6: ┤6                       ├
+     │                        │
+q_7: ┤7                       ├
+     │                        │
+q_8: ┤8                       ├
+     │                        │
+q_9: ┤9                       ├
+     └────────────────────────┘
+初始值[-0.1257743209597184, 0.0]ansatz_operator:[PauliSumOp(SparsePauliOp(['YZZZYXZZZY', 'XZZZYYZZZY', 'XZZZXXZZZY', 'YZZZXYZZZY', 'XZZZYXZZZX', 'YZZZYYZZZX', 'YZZZXXZZZX', 'XZZZXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYXZZZY', 'IIIXYYZZZY', 'IIIXXXZZZY', 'IIIYXYZZZY', 'IIIXYXZZZX', 'IIIYYYZZZX', 'IIIYXXZZZX', 'IIIXXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0)]
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 0.4513278007507324 seconds.
+Found optimal point [-0.1266283   0.05648801]
+INFO:官方adapt:--- Iteration #3 ---
+INFO:官方adapt:第3轮的梯度为:[(0.009402929968177607, {}), (0.0, {}), (0.0, {}), (-0.0010135913633511576, {}), (-0.006887669758600789, {}), (0.0, {}), (0.0, {}), (-0.005154110302048888, {}), (-0.03261289365474144, {}), (0.0, {}), (0.0, {}), (0.07335210183038204, {}), (0.0, {}), (-0.038456890061554096, {}), (0.0, {}), (0.0, {}), (0.0, {}), (0.0, {}), (-0.038456890061554096, {}), (0.0, {}), (9.765406263798749e-05, {}), (0.0, {}), (0.0, {}), (6.793203893329901e-06, {})]其中最大的为第11个,值为:(0.07335210183038204, {})
+INFO:官方adapt:目前的op:[23, 20, 11]开始比较0.07335210183038204和0.001
+INFO:官方adapt:Alternating sequence found. Finishing.
+INFO:官方adapt:目前送给slover的数据如下:
+     ┌─────────────────────────────┐
+q_0: ┤0                            ├
+     │                             │
+q_1: ┤1                            ├
+     │                             │
+q_2: ┤2                            ├
+     │                             │
+q_3: ┤3                            ├
+     │                             │
+q_4: ┤4                            ├
+     │  EvolvedOps(t[0],t[1],t[2]) │
+q_5: ┤5                            ├
+     │                             │
+q_6: ┤6                            ├
+     │                             │
+q_7: ┤7                            ├
+     │                             │
+q_8: ┤8                            ├
+     │                             │
+q_9: ┤9                            ├
+     └─────────────────────────────┘
+初始值[-0.12662829982180035, 0.05648801067997476, 0.0]ansatz_operator:[PauliSumOp(SparsePauliOp(['YZZZYXZZZY', 'XZZZYYZZZY', 'XZZZXXZZZY', 'YZZZXYZZZY', 'XZZZYXZZZX', 'YZZZYYZZZX', 'YZZZXXZZZX', 'XZZZXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYXZZZY', 'IIIXYYZZZY', 'IIIXXXZZZY', 'IIIYXYZZZY', 'IIIXYXZZZX', 'IIIYYYZZZX', 'IIIYXXZZZX', 'IIIXXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['YZZZYIIIXY', 'XZZZYIIIYY', 'XZZZXIIIXY', 'YZZZXIIIYY', 'XZZZYIIIXX', 'YZZZYIIIYX', 'YZZZXIIIXX', 'XZZZXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0)]
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 1.0050780773162842 seconds.
+Found optimal point [-0.1273363   0.0540231   0.05422539]
+INFO:官方adapt:--- Iteration #4 ---
+INFO:官方adapt:第4轮的梯度为:[(-0.004901116261468821, {}), (0.0, {}), (0.0, {}), (-0.004565754543291195, {}), (-0.0048656299258120084, {}), (0.0, {}), (0.0, {}), (-0.004555057737028008, {}), (-0.04303763139121663, {}), (0.0, {}), (0.0, {}), (0.0001419295733136386, {}), (0.0, {}), (-0.03694229720353546, {}), (0.0, {}), (0.0, {}), (0.0, {}), (0.0, {}), (-0.03694229720353546, {}), (0.0, {}), (0.00030165733488942044, {}), (0.0, {}), (0.0, {}), (-0.00015860977104393019, {})]其中最大的为第8个,值为:(-0.04303763139121663, {})
+INFO:官方adapt:目前的op:[23, 20, 11, 8]开始比较0.04303763139121663和0.001
+INFO:官方adapt:Alternating sequence found. Finishing.
+INFO:官方adapt:目前送给slover的数据如下:
+     ┌──────────────────────────────────┐
+q_0: ┤0                                 ├
+     │                                  │
+q_1: ┤1                                 ├
+     │                                  │
+q_2: ┤2                                 ├
+     │                                  │
+q_3: ┤3                                 ├
+     │                                  │
+q_4: ┤4                                 ├
+     │  EvolvedOps(t[0],t[1],t[2],t[3]) │
+q_5: ┤5                                 ├
+     │                                  │
+q_6: ┤6                                 ├
+     │                                  │
+q_7: ┤7                                 ├
+     │                                  │
+q_8: ┤8                                 ├
+     │                                  │
+q_9: ┤9                                 ├
+     └──────────────────────────────────┘
+初始值[-0.12733630474496568, 0.05402310450943692, 0.054225394051978716, 0.0]ansatz_operator:[PauliSumOp(SparsePauliOp(['YZZZYXZZZY', 'XZZZYYZZZY', 'XZZZXXZZZY', 'YZZZXYZZZY', 'XZZZYXZZZX', 'YZZZYYZZZX', 'YZZZXXZZZX', 'XZZZXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYXZZZY', 'IIIXYYZZZY', 'IIIXXXZZZY', 'IIIYXYZZZY', 'IIIXYXZZZX', 'IIIYYYZZZX', 'IIIYXXZZZX', 'IIIXXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['YZZZYIIIXY', 'XZZZYIIIYY', 'XZZZXIIIXY', 'YZZZXIIIYY', 'XZZZYIIIXX', 'YZZZYIIIYX', 'YZZZXIIIXX', 'XZZZXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYIIIXY', 'IIIXYIIIYY', 'IIIXXIIIXY', 'IIIYXIIIYY', 'IIIXYIIIXX', 'IIIYYIIIYX', 'IIIYXIIIXX', 'IIIXXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0)]
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 1.4127862453460693 seconds.
+Found optimal point [-0.1262632   0.0587247   0.05882972 -0.03334798]
+INFO:官方adapt:--- Iteration #5 ---
+INFO:官方adapt:第5轮的梯度为:[(-0.0102142858517574, {}), (0.0, {}), (0.0, {}), (-0.005265826696775325, {}), (-0.010213315584498147, {}), (0.0, {}), (0.0, {}), (-0.005265500744123825, {}), (2.6193341110374354e-05, {}), (0.0, {}), (0.0, {}), (0.000289328426786194, {}), (0.0, {}), (-0.03397289391548418, {}), (0.0, {}), (0.0, {}), (0.0, {}), (0.0, {}), (-0.03397289391548418, {}), (0.0, {}), (0.0002938604894636669, {}), (0.0, {}), (0.0, {}), (-0.0005296615412875936, {})]其中最大的为第13个,值为:(-0.03397289391548418, {})
+INFO:官方adapt:目前的op:[23, 20, 11, 8, 13]开始比较0.03397289391548418和0.001
+INFO:官方adapt:Alternating sequence found. Finishing.
+INFO:官方adapt:目前送给slover的数据如下:
+     ┌───────────────────────────────────────┐
+q_0: ┤0                                      ├
+     │                                       │
+q_1: ┤1                                      ├
+     │                                       │
+q_2: ┤2                                      ├
+     │                                       │
+q_3: ┤3                                      ├
+     │                                       │
+q_4: ┤4                                      ├
+     │  EvolvedOps(t[0],t[1],t[2],t[3],t[4]) │
+q_5: ┤5                                      ├
+     │                                       │
+q_6: ┤6                                      ├
+     │                                       │
+q_7: ┤7                                      ├
+     │                                       │
+q_8: ┤8                                      ├
+     │                                       │
+q_9: ┤9                                      ├
+     └───────────────────────────────────────┘
+初始值[-0.12626320431086932, 0.05872470402516938, 0.05882972453473349, -0.03334797983549198, 0.0]ansatz_operator:[PauliSumOp(SparsePauliOp(['YZZZYXZZZY', 'XZZZYYZZZY', 'XZZZXXZZZY', 'YZZZXYZZZY', 'XZZZYXZZZX', 'YZZZYYZZZX', 'YZZZXXZZZX', 'XZZZXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYXZZZY', 'IIIXYYZZZY', 'IIIXXXZZZY', 'IIIYXYZZZY', 'IIIXYXZZZX', 'IIIYYYZZZX', 'IIIYXXZZZX', 'IIIXXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['YZZZYIIIXY', 'XZZZYIIIYY', 'XZZZXIIIXY', 'YZZZXIIIYY', 'XZZZYIIIXX', 'YZZZYIIIYX', 'YZZZXIIIXX', 'XZZZXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYIIIXY', 'IIIXYIIIYY', 'IIIXXIIIXY', 'IIIYXIIIYY', 'IIIXYIIIXX', 'IIIYYIIIYX', 'IIIYXIIIXX', 'IIIXXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIYZYIIXZY', 'IIXZYIIYZY', 'IIXZXIIXZY', 'IIYZXIIYZY', 'IIXZYIIXZX', 'IIYZYIIYZX', 'IIYZXIIXZX', 'IIXZXIIYZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0)]
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 1.6805627346038818 seconds.
+Found optimal point [-0.1259615   0.05809786  0.0581975  -0.03150582 -0.02562095]
+INFO:官方adapt:--- Iteration #6 ---
+INFO:官方adapt:第6轮的梯度为:[(-0.010900040971655095, {}), (-0.0, {}), (0.0, {}), (-0.004049658000410232, {}), (-0.010899665681415304, {}), (0.0, {}), (0.0, {}), (-0.004049531987314568, {}), (-0.00011345807598219074, {}), (-0.0, {}), (0.0, {}), (3.929550700731933e-05, {}), (0.0, {}), (-0.00013601470159465098, {}), (0.0, {}), (-0.0, {}), (0.0, {}), (0.0, {}), (-0.03330968871515278, {}), (0.0, {}), (4.104010549897154e-05, {}), (0.0, {}), (0.0, {}), (-6.5789692534497755e-06, {})]其中最大的为第18个,值为:(-0.03330968871515278, {})
+INFO:官方adapt:目前的op:[23, 20, 11, 8, 13, 18]开始比较0.03330968871515278和0.001
+INFO:官方adapt:Alternating sequence found. Finishing.
+INFO:官方adapt:目前送给slover的数据如下:
+     ┌────────────────────────────────────────────┐
+q_0: ┤0                                           ├
+     │                                            │
+q_1: ┤1                                           ├
+     │                                            │
+q_2: ┤2                                           ├
+     │                                            │
+q_3: ┤3                                           ├
+     │                                            │
+q_4: ┤4                                           ├
+     │  EvolvedOps(t[0],t[1],t[2],t[3],t[4],t[5]) │
+q_5: ┤5                                           ├
+     │                                            │
+q_6: ┤6                                           ├
+     │                                            │
+q_7: ┤7                                           ├
+     │                                            │
+q_8: ┤8                                           ├
+     │                                            │
+q_9: ┤9                                           ├
+     └────────────────────────────────────────────┘
+初始值[-0.12596149515606897, 0.058097856095304844, 0.05819750172572607, -0.03150581985820854, -0.02562094984380251, 0.0]ansatz_operator:[PauliSumOp(SparsePauliOp(['YZZZYXZZZY', 'XZZZYYZZZY', 'XZZZXXZZZY', 'YZZZXYZZZY', 'XZZZYXZZZX', 'YZZZYYZZZX', 'YZZZXXZZZX', 'XZZZXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYXZZZY', 'IIIXYYZZZY', 'IIIXXXZZZY', 'IIIYXYZZZY', 'IIIXYXZZZX', 'IIIYYYZZZX', 'IIIYXXZZZX', 'IIIXXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['YZZZYIIIXY', 'XZZZYIIIYY', 'XZZZXIIIXY', 'YZZZXIIIYY', 'XZZZYIIIXX', 'YZZZYIIIYX', 'YZZZXIIIXX', 'XZZZXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYIIIXY', 'IIIXYIIIYY', 'IIIXXIIIXY', 'IIIYXIIIYY', 'IIIXYIIIXX', 'IIIYYIIIYX', 'IIIYXIIIXX', 'IIIXXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIYZYIIXZY', 'IIXZYIIYZY', 'IIXZXIIXZY', 'IIYZXIIYZY', 'IIXZYIIXZX', 'IIYZYIIYZX', 'IIYZXIIXZX', 'IIXZXIIYZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IYZZYIXZZY', 'IXZZYIYZZY', 'IXZZXIXZZY', 'IYZZXIYZZY', 'IXZZYIXZZX', 'IYZZYIYZZX', 'IYZZXIXZZX', 'IXZZXIYZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0)]
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 2.411895751953125 seconds.
+Found optimal point [-0.12545066  0.05732545  0.057421   -0.0297977  -0.02511978 -0.02513757]
+INFO:官方adapt:--- Iteration #7 ---
+INFO:官方adapt:第7轮的梯度为:[(-0.011538443130138796, {}), (-0.0, {}), (-0.0, {}), (-0.0028730961850861377, {}), (-0.011538128495539318, {}), (-0.0, {}), (-0.0, {}), (-0.002872990638951371, {}), (-0.00011148864102684611, {}), (0.0, {}), (0.0, {}), (4.460623041090063e-05, {}), (0.0, {}), (-0.0001392707105982146, {}), (-0.0, {}), (-0.0, {}), (0.0, {}), (-0.0, {}), (-0.00012650424243264822, {}), (-0.0, {}), (4.606221093737502e-05, {}), (-0.0, {}), (-0.0, {}), (6.107926439155478e-05, {})]其中最大的为第0个,值为:(-0.011538443130138796, {})
+INFO:官方adapt:目前的op:[23, 20, 11, 8, 13, 18, 0]开始比较0.011538443130138796和0.001
+INFO:官方adapt:Alternating sequence found. Finishing.
+INFO:官方adapt:目前送给slover的数据如下:
+     ┌─────────────────────────────────────────────────┐
+q_0: ┤0                                                ├
+     │                                                 │
+q_1: ┤1                                                ├
+     │                                                 │
+q_2: ┤2                                                ├
+     │                                                 │
+q_3: ┤3                                                ├
+     │                                                 │
+q_4: ┤4                                                ├
+     │  EvolvedOps(t[0],t[1],t[2],t[3],t[4],t[5],t[6]) │
+q_5: ┤5                                                ├
+     │                                                 │
+q_6: ┤6                                                ├
+     │                                                 │
+q_7: ┤7                                                ├
+     │                                                 │
+q_8: ┤8                                                ├
+     │                                                 │
+q_9: ┤9                                                ├
+     └─────────────────────────────────────────────────┘
+初始值[-0.1254506627927354, 0.057325453345527355, 0.057421000435240996, -0.029797703082309092, -0.025119784370410923, -0.025137571141141877, 0.0]ansatz_operator:[PauliSumOp(SparsePauliOp(['YZZZYXZZZY', 'XZZZYYZZZY', 'XZZZXXZZZY', 'YZZZXYZZZY', 'XZZZYXZZZX', 'YZZZYYZZZX', 'YZZZXXZZZX', 'XZZZXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYXZZZY', 'IIIXYYZZZY', 'IIIXXXZZZY', 'IIIYXYZZZY', 'IIIXYXZZZX', 'IIIYYYZZZX', 'IIIYXXZZZX', 'IIIXXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['YZZZYIIIXY', 'XZZZYIIIYY', 'XZZZXIIIXY', 'YZZZXIIIYY', 'XZZZYIIIXX', 'YZZZYIIIYX', 'YZZZXIIIXX', 'XZZZXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYIIIXY', 'IIIXYIIIYY', 'IIIXXIIIXY', 'IIIYXIIIYY', 'IIIXYIIIXX', 'IIIYYIIIYX', 'IIIYXIIIXX', 'IIIXXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIYZYIIXZY', 'IIXZYIIYZY', 'IIXZXIIXZY', 'IIYZXIIYZY', 'IIXZYIIXZX', 'IIYZYIIYZX', 'IIYZXIIXZX', 'IIXZXIIYZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IYZZYIXZZY', 'IXZZYIYZZY', 'IXZZXIXZZY', 'IYZZXIYZZY', 'IXZZYIXZZX', 'IYZZYIYZZX', 'IYZZXIXZZX', 'IXZZXIYZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIIIIIIXY', 'IIIIIIIIYX'],
+              coeffs=[ 0.5+0.j, -0.5+0.j]), coeff=1.0)]
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 2.620142698287964 seconds.
+Found optimal point [-0.12444478  0.05699547  0.06618707 -0.03549165 -0.02600202 -0.02601241
+ -0.0430321 ]
+INFO:官方adapt:--- Iteration #8 ---
+INFO:官方adapt:第8轮的梯度为:[(0.00013681607118977386, {}), (0.0, {}), (0.0, {}), (-0.0036899136956304508, {}), (-0.010136685736427488, {}), (0.0, {}), (0.0, {}), (-0.009171816760453363, {}), (0.000872661702389885, {}), (-0.0, {}), (-0.0, {}), (0.0006819116605270177, {}), (-0.0, {}), (-2.8512153417974194e-05, {}), (0.0, {}), (0.0, {}), (-0.0, {}), (-0.0, {}), (-2.6457002409581724e-05, {}), (0.0, {}), (0.00027905374818160795, {}), (0.0, {}), (0.0, {}), (0.0014246417203611168, {})]其中最大的为第4个,值为:(-0.010136685736427488, {})
+INFO:官方adapt:目前的op:[23, 20, 11, 8, 13, 18, 0, 4]开始比较0.010136685736427488和0.001
+INFO:官方adapt:Alternating sequence found. Finishing.
+INFO:官方adapt:目前送给slover的数据如下:
+     ┌──────────────────────────────────────────────────────┐
+q_0: ┤0                                                     ├
+     │                                                      │
+q_1: ┤1                                                     ├
+     │                                                      │
+q_2: ┤2                                                     ├
+     │                                                      │
+q_3: ┤3                                                     ├
+     │                                                      │
+q_4: ┤4                                                     ├
+     │  EvolvedOps(t[0],t[1],t[2],t[3],t[4],t[5],t[6],t[7]) │
+q_5: ┤5                                                     ├
+     │                                                      │
+q_6: ┤6                                                     ├
+     │                                                      │
+q_7: ┤7                                                     ├
+     │                                                      │
+q_8: ┤8                                                     ├
+     │                                                      │
+q_9: ┤9                                                     ├
+     └──────────────────────────────────────────────────────┘
+初始值[-0.12444477501120264, 0.056995467410957, 0.06618706555999945, -0.03549164921631175, -0.026002023806853295, -0.026012407892734745, -0.04303210314187735, 0.0]ansatz_operator:[PauliSumOp(SparsePauliOp(['YZZZYXZZZY', 'XZZZYYZZZY', 'XZZZXXZZZY', 'YZZZXYZZZY', 'XZZZYXZZZX', 'YZZZYYZZZX', 'YZZZXXZZZX', 'XZZZXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYXZZZY', 'IIIXYYZZZY', 'IIIXXXZZZY', 'IIIYXYZZZY', 'IIIXYXZZZX', 'IIIYYYZZZX', 'IIIYXXZZZX', 'IIIXXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['YZZZYIIIXY', 'XZZZYIIIYY', 'XZZZXIIIXY', 'YZZZXIIIYY', 'XZZZYIIIXX', 'YZZZYIIIYX', 'YZZZXIIIXX', 'XZZZXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYIIIXY', 'IIIXYIIIYY', 'IIIXXIIIXY', 'IIIYXIIIYY', 'IIIXYIIIXX', 'IIIYYIIIYX', 'IIIYXIIIXX', 'IIIXXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIYZYIIXZY', 'IIXZYIIYZY', 'IIXZXIIXZY', 'IIYZXIIYZY', 'IIXZYIIXZX', 'IIYZYIIYZX', 'IIYZXIIXZX', 'IIXZXIIYZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IYZZYIXZZY', 'IXZZYIYZZY', 'IXZZXIXZZY', 'IYZZXIYZZY', 'IXZZYIXZZX', 'IYZZYIYZZX', 'IYZZXIXZZX', 'IXZZXIYZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIIIIIIXY', 'IIIIIIIIYX'],
+              coeffs=[ 0.5+0.j, -0.5+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIXYIIIII', 'IIIYXIIIII'],
+              coeffs=[ 0.5+0.j, -0.5+0.j]), coeff=1.0)]
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 4.834996461868286 seconds.
+Found optimal point [-0.12238645  0.06485979  0.06563985 -0.04053832 -0.0266644  -0.02667458
+ -0.03969198 -0.03745763]
+INFO:官方adapt:--- Iteration #9 ---
+INFO:官方adapt:第9轮的梯度为:[(0.0004986910063054863, {}), (0.0, {}), (-0.0, {}), (-0.009020374252660562, {}), (1.312398213270034e-05, {}), (0.0, {}), (-0.0, {}), (-0.009299288920038347, {}), (0.00011854687795929036, {}), (-0.0, {}), (0.0, {}), (9.38245376683538e-05, {}), (-0.0, {}), (-0.0001223199569965647, {}), (0.0, {}), (0.0, {}), (0.0, {}), (-0.0, {}), (-0.00012142121329211658, {}), (-0.0, {}), (0.000291477235639367, {}), (0.0, {}), (-0.0, {}), (-0.00010070508074983041, {})]其中最大的为第7个,值为:(-0.009299288920038347, {})
+INFO:官方adapt:目前的op:[23, 20, 11, 8, 13, 18, 0, 4, 7]开始比较0.009299288920038347和0.001
+INFO:官方adapt:Alternating sequence found. Finishing.
+INFO:官方adapt:目前送给slover的数据如下:
+     ┌───────────────────────────────────────────────────────────┐
+q_0: ┤0                                                          ├
+     │                                                           │
+q_1: ┤1                                                          ├
+     │                                                           │
+q_2: ┤2                                                          ├
+     │                                                           │
+q_3: ┤3                                                          ├
+     │                                                           │
+q_4: ┤4                                                          ├
+     │  EvolvedOps(t[0],t[1],t[2],t[3],t[4],t[5],t[6],t[7],t[8]) │
+q_5: ┤5                                                          ├
+     │                                                           │
+q_6: ┤6                                                          ├
+     │                                                           │
+q_7: ┤7                                                          ├
+     │                                                           │
+q_8: ┤8                                                          ├
+     │                                                           │
+q_9: ┤9                                                          ├
+     └───────────────────────────────────────────────────────────┘
+初始值[-0.12238645041818808, 0.06485979281095533, 0.06563985412978801, -0.040538318465122625, -0.026664402620415962, -0.026674582786078753, -0.03969197838461193, -0.037457625492725626, 0.0]ansatz_operator:[PauliSumOp(SparsePauliOp(['YZZZYXZZZY', 'XZZZYYZZZY', 'XZZZXXZZZY', 'YZZZXYZZZY', 'XZZZYXZZZX', 'YZZZYYZZZX', 'YZZZXXZZZX', 'XZZZXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYXZZZY', 'IIIXYYZZZY', 'IIIXXXZZZY', 'IIIYXYZZZY', 'IIIXYXZZZX', 'IIIYYYZZZX', 'IIIYXXZZZX', 'IIIXXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['YZZZYIIIXY', 'XZZZYIIIYY', 'XZZZXIIIXY', 'YZZZXIIIYY', 'XZZZYIIIXX', 'YZZZYIIIYX', 'YZZZXIIIXX', 'XZZZXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYIIIXY', 'IIIXYIIIYY', 'IIIXXIIIXY', 'IIIYXIIIYY', 'IIIXYIIIXX', 'IIIYYIIIYX', 'IIIYXIIIXX', 'IIIXXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIYZYIIXZY', 'IIXZYIIYZY', 'IIXZXIIXZY', 'IIYZXIIYZY', 'IIXZYIIXZX', 'IIYZYIIYZX', 'IIYZXIIXZX', 'IIXZXIIYZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IYZZYIXZZY', 'IXZZYIYZZY', 'IXZZXIXZZY', 'IYZZXIYZZY', 'IXZZYIXZZX', 'IYZZYIYZZX', 'IYZZXIXZZX', 'IXZZXIYZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIIIIIIXY', 'IIIIIIIIYX'],
+              coeffs=[ 0.5+0.j, -0.5+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIXYIIIII', 'IIIYXIIIII'],
+              coeffs=[ 0.5+0.j, -0.5+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['XZZZYIIIII', 'YZZZXIIIII'],
+              coeffs=[ 0.5+0.j, -0.5+0.j]), coeff=1.0)]
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 3.134659767150879 seconds.
+Found optimal point [-0.12257772  0.06551299  0.06501084 -0.04054842 -0.02632928 -0.02633869
+ -0.04022427 -0.03749265 -0.00903302]
+INFO:官方adapt:--- Iteration #10 ---
+INFO:官方adapt:第10轮的梯度为:[(-0.0005563876675087921, {}), (-0.0, {}), (-0.0, {}), (-0.00469008538804713, {}), (-0.0001142458287712326, {}), (-0.0, {}), (-0.0, {}), (-3.89413244264317e-05, {}), (-0.00022444273953643317, {}), (0.0, {}), (0.0, {}), (0.00038061320404278324, {}), (0.0, {}), (-0.0001739940724497341, {}), (0.0, {}), (-0.0, {}), (0.0, {}), (-0.0, {}), (-0.00017363762770151997, {}), (-0.0, {}), (2.5351697825250663e-05, {}), (-0.0, {}), (-0.0, {}), (0.00016809529337210249, {})]其中最大的为第3个,值为:(-0.00469008538804713, {})
+INFO:官方adapt:目前的op:[23, 20, 11, 8, 13, 18, 0, 4, 7, 3]开始比较0.00469008538804713和0.001
+INFO:官方adapt:Alternating sequence found. Finishing.
+INFO:官方adapt:目前送给slover的数据如下:
+     ┌────────────────────────────────────────────────────────────────┐
+q_0: ┤0                                                               ├
+     │                                                                │
+q_1: ┤1                                                               ├
+     │                                                                │
+q_2: ┤2                                                               ├
+     │                                                                │
+q_3: ┤3                                                               ├
+     │                                                                │
+q_4: ┤4                                                               ├
+     │  EvolvedOps(t[0],t[1],t[2],t[3],t[4],t[5],t[6],t[7],t[8],t[9]) │
+q_5: ┤5                                                               ├
+     │                                                                │
+q_6: ┤6                                                               ├
+     │                                                                │
+q_7: ┤7                                                               ├
+     │                                                                │
+q_8: ┤8                                                               ├
+     │                                                                │
+q_9: ┤9                                                               ├
+     └────────────────────────────────────────────────────────────────┘
+初始值[-0.12257772033215261, 0.06551299135934864, 0.06501084159574012, -0.04054842100349564, -0.02632928172943975, -0.026338688672389605, -0.0402242651443323, -0.037492650542850954, -0.009033021795562127, 0.0]ansatz_operator:[PauliSumOp(SparsePauliOp(['YZZZYXZZZY', 'XZZZYYZZZY', 'XZZZXXZZZY', 'YZZZXYZZZY', 'XZZZYXZZZX', 'YZZZYYZZZX', 'YZZZXXZZZX', 'XZZZXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYXZZZY', 'IIIXYYZZZY', 'IIIXXXZZZY', 'IIIYXYZZZY', 'IIIXYXZZZX', 'IIIYYYZZZX', 'IIIYXXZZZX', 'IIIXXYZZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['YZZZYIIIXY', 'XZZZYIIIYY', 'XZZZXIIIXY', 'YZZZXIIIYY', 'XZZZYIIIXX', 'YZZZYIIIYX', 'YZZZXIIIXX', 'XZZZXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIYYIIIXY', 'IIIXYIIIYY', 'IIIXXIIIXY', 'IIIYXIIIYY', 'IIIXYIIIXX', 'IIIYYIIIYX', 'IIIYXIIIXX', 'IIIXXIIIYX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIYZYIIXZY', 'IIXZYIIYZY', 'IIXZXIIXZY', 'IIYZXIIYZY', 'IIXZYIIXZX', 'IIYZYIIYZX', 'IIYZXIIXZX', 'IIXZXIIYZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IYZZYIXZZY', 'IXZZYIYZZY', 'IXZZXIXZZY', 'IYZZXIYZZY', 'IXZZYIXZZX', 'IYZZYIYZZX', 'IYZZXIXZZX', 'IXZZXIYZZX'],
+              coeffs=[-0.125+0.j, -0.125+0.j, -0.125+0.j,  0.125+0.j, -0.125+0.j,  0.125+0.j,
+  0.125+0.j,  0.125+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIIIIIIXY', 'IIIIIIIIYX'],
+              coeffs=[ 0.5+0.j, -0.5+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIXYIIIII', 'IIIYXIIIII'],
+              coeffs=[ 0.5+0.j, -0.5+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['XZZZYIIIII', 'YZZZXIIIII'],
+              coeffs=[ 0.5+0.j, -0.5+0.j]), coeff=1.0), PauliSumOp(SparsePauliOp(['IIIIIXZZZY', 'IIIIIYZZZX'],
+              coeffs=[ 0.5+0.j, -0.5+0.j]), coeff=1.0)]
+INFO:qiskit.algorithms.minimum_eigensolvers.vqe:Optimization complete in 3.5200400352478027 seconds.
+Found optimal point [-0.12255813  0.06522795  0.06589656 -0.04104876 -0.02628135 -0.0262905
+ -0.04146717 -0.03843541 -0.00694341 -0.00572137]
+INFO:官方adapt:--- Iteration #11 ---
+INFO:官方adapt:第11轮的梯度为:[(-5.267561349794287e-05, {}), (-0.0, {}), (0.0, {}), (4.7432259936572296e-05, {}), (-0.0006000067743733885, {}), (-0.0, {}), (0.0, {}), (0.0003294515576073973, {}), (-0.00014630305065403655, {}), (0.0, {}), (-0.0, {}), (9.744483897136539e-05, {}), (0.0, {}), (-0.00011224225376660856, {}), (-0.0, {}), (-0.0, {}), (-0.0, {}), (-0.0, {}), (-0.00011215823951717097, {}), (0.0, {}), (0.00011591873031739468, {}), (-0.0, {}), (0.0, {}), (0.0001874289783922894, {})]其中最大的为第4个,值为:(-0.0006000067743733885, {})
+INFO:官方adapt:目前的op:[23, 20, 11, 8, 13, 18, 0, 4, 7, 3, 4]开始比较0.0006000067743733885和0.001
+INFO:官方adapt:AdaptVQE terminated successfully with a final maximum gradient: 0.0006000067743733885
+INFO:官方adapt:辅助算符存在
+INFO:官方adapt:The final energy is: -1.0556740360142365
