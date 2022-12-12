@@ -1,10 +1,10 @@
 
 from qiskit_nature.second_q.problems import ElectronicStructureProblem
 from qiskit_nature.second_q.drivers import PySCFDriver
-from typing import List
+from typing import List,Sequence
 from qiskit.circuit import Instruction, InstructionSet
 from qiskit_nature.second_q.mappers import JordanWignerMapper, QubitConverter
-from qiskit_nature.second_q.circuit.library import HartreeFock, UCCSD
+from qiskit_nature.second_q.circuit.library import HartreeFock, UCCSD,UCC
 from qiskit.algorithms.minimum_eigensolvers import VQE
 from qiskit.algorithms.optimizers import SLSQP
 from qiskit.circuit.library import EvolvedOperatorAnsatz
@@ -65,10 +65,9 @@ class MyAdaptVQE(object):
         # UCCSD算符池 （二次量子化后）
         # uccsd.excitation_ops()=>算符池的算符列表 [FermionOp]
         if custom_operation_pool==None:
-            self.excitation_pool = [self.converter.convert(
-                i) for i in uccsd.excitation_ops()]
+            self.excitation_pool = [self.converter.convert(i) for i in uccsd.excitation_ops()]
             # excitation_pool_instruction 是不包含hf的！
-            self.excitation_pool_instruction = [EvolvedOperatorAnsatz(operators=i, insert_barriers=False, name='Term_'+str(index), parameter_prefix='term_'+str(index)).to_instruction()
+            self.excitation_pool_instruction = [EvolvedOperatorAnsatz(operators=i, insert_barriers=False, name='Term_'+str(index), parameter_prefix='term_'+str(index)).to_instruction()\
                                                 for index, i in enumerate(self.excitation_pool)]
         else:
             self.excitation_pool = custom_operation_pool
@@ -83,6 +82,17 @@ class MyAdaptVQE(object):
         self.adapt_ansatz.append(self.circuit_measurement_first())
         self.converageflag = False
 
+    # @property #只读property
+    # def excitation_pool(self):
+    #     return self.excitation_pool
+    
+    # @excitation_pool.setter  
+    # def excitation_pool(self,excitation_list:Sequence):
+    #     self.excitation_pool = excitation_list
+    #     self.excitation_pool_instruction = [EvolvedOperatorAnsatz(operators=i, insert_barriers=False, name='Term_'+str(index), parameter_prefix='term_'+str(index)).to_instruction()
+    #                                          for index, i in enumerate(self.excitation_pool)]
+         
+    
     @staticmethod
     # 参数是 每一轮求得的梯度的平方之和
     def check_gradient_converge(value, criterion: float = 1e-3) -> bool:
@@ -240,15 +250,124 @@ class MyAdaptVQE(object):
         logger.info(
             f'===FINAL OUTCOME===\nOrder={self._already_pick_index}\nOptimal value={optimal_parameter}\nTotal iteration={self.iteration_index-1}')
 
-    def run_once_solver(self):
-        self.slover.ansatz =None
-        qc = QuantumCircuit(self.n_qubit)
-        qc.append(self.init_state_hf, range(self.n_qubit))
-        qc.append(self.excitation_pool_instruction[23],range(self.n_qubit))
-        # for index, k in enumerate(self.adapt_ansatz):
-        #     qc.append(k, range(self.n_qubit))
+
+class MyG_AdaotVQE():
+    def __init__(self,ES_problem:ElectronicStructureProblem) -> None:
+                ###logger set
+        # 定义记录器对象
+        self._logger2 = logging.getLogger('MyGAdaptVQE')
+        # 设置记录器级别
+        self._logger2.setLevel(logging.DEBUG)
+        # 设置过滤器 只有被选中的可以记录
+        myfilter = logging.Filter('MyGAdaptVQE')
+        # 定义处理器-文件处理器
+        filehandler = logging.FileHandler(filename='./Gadapt_vqe1212.log', mode='a')
+        filehandler.addFilter(myfilter)
+        formatter = logging.Formatter('%(asctime)s-%(levelname)s-\n%(message)s')
+        filehandler.setFormatter(formatter)
+        # 定义处理器-控制台处理器
+        concolehander = logging.StreamHandler()
+        concolehander.setLevel(logging.INFO)
+        # 记录器绑定handerler
+        self._logger2.addHandler(filehandler)
+        self._logger2.addHandler(concolehander)
         
-        self.slover.ansatz = qc
-        self.slover.initial_point=np.zeros(qc.num_parameters)
-        raw_result =self.slover.compute_minimum_eigenvalue(self.hamiltonian)
-        print(f'initial_point={self.slover.initial_point},circuit=\n{self.slover.ansatz.decompose()},\nvalue:\n{raw_result.optimal_point}')
+        # super(MyAdaptVQE,self).__init__()
+        self.es_problem = ES_problem
+        self.prolem_spatial_orbitals = ES_problem.num_spatial_orbitals
+        self.problem_spin_orbitals = ES_problem.num_spin_orbitals
+        self.converter = QubitConverter(JordanWignerMapper())
+        self.hamiltonian = self.converter.convert(ES_problem.hamiltonian.second_q_op())  # 二次量子化后的Hamiltonian
+        self.init_state_hf = HartreeFock(num_particles=self.es_problem.num_particles,
+                                         num_spatial_orbitals=self.es_problem.num_spatial_orbitals,
+                                         qubit_converter=self.converter)
+        self.n_qubit = self.init_state_hf.num_qubits
+        
+
+                
+        #convert过后的玻色子算符
+        self.UCCD_op = [self.converter.convert(i) for i in UCC(num_particles=self.es_problem.num_particles,num_spatial_orbitals=self.es_problem.num_spatial_orbitals,
+                           qubit_converter=self.converter,generalized=False,excitations='d').excitation_ops()]
+        self.UCCGD_op =[self.converter.convert(i) for i in UCC(num_particles=self.es_problem.num_particles,num_spatial_orbitals=self.es_problem.num_spatial_orbitals,
+                           qubit_converter=self.converter,generalized=True,excitations='d').excitation_ops()]
+        self.UCCD_instrcution = [EvolvedOperatorAnsatz(operators=i, insert_barriers=True, name='D_'+str(index), parameter_prefix='D_'+str(index)).to_instruction()\
+                                                for index, i in enumerate(self.UCCD_op)]
+        self.UCCGD_instrcution = [EvolvedOperatorAnsatz(operators=i, insert_barriers=True, name='D_'+str(index), parameter_prefix='D_'+str(index)).to_instruction()\
+                                                for index, i in enumerate(self.UCCGD_op)]
+        
+        self.conclude_operator_pool()
+        
+        
+        
+
+        
+        
+    def pick_UCCD_op(self,threshold = 1e-20):
+        #threshold是指 选取第一次梯度绝对值大于多少(threshold)的算符入选 
+        estimator = Estimator()
+        circuit_d =[]
+        commutors = [1j*(self.hamiltonian@i - i@self.hamiltonian) for i in self.UCCD_op]
+        for i in self.UCCD_instrcution:
+            qc = QuantumCircuit(self.n_qubit)
+            qc.append(self.init_state_hf,range(self.n_qubit))
+            qc.append(i,range(self.n_qubit))
+            circuit_d.append(qc)
+        job = estimator.run(circuits=circuit_d,observables=commutors,parameter_values=[[0.0]]*len(circuit_d))
+        result = job.result()
+        #梯度绝对值
+        abs_value = np.abs(result.values)
+        np_sort = np.argsort(abs_value)#存着index
+        np_sort = np_sort[::-1] #从大到小排列
+        #被选中的算符index
+        pick_index = [i for i in np_sort if abs_value[i]>threshold]
+        self._logger2.info(f'UCCD算符池筛选完毕!共入选{len(pick_index)}个,阈值是{threshold},具体index:\n{pick_index},\n\
+            入选率:{len(pick_index)/len(self.UCCD_op)*100}%')
+        return pick_index
+
+        
+        
+        
+    def pick_UCCGD_op(self,threshold = 1e-15):
+        #threshold是指 选取第一次梯度绝对值大于多少(threshold)的算符入选 
+        estimator = Estimator()
+        circuit_d =[]
+        commutors = [1j*(self.hamiltonian@i - i@self.hamiltonian) for i in self.UCCGD_op]
+        for i in self.UCCGD_instrcution:
+            qc = QuantumCircuit(self.n_qubit)
+            qc.append(self.init_state_hf,range(self.n_qubit))
+            qc.append(i,range(self.n_qubit))
+            circuit_d.append(qc)
+        job = estimator.run(circuits=circuit_d,observables=commutors,parameter_values=[[0.0]]*len(circuit_d))
+        result = job.result()
+        #梯度绝对值
+        abs_value = np.abs(result.values)
+        np_sort = np.argsort(abs_value)#存着index
+        np_sort = np_sort[::-1] #从大到小排列
+        #被选中的算符index
+        pick_index = [i for i in np_sort if abs_value[i]>threshold]
+        self._logger2.info(f'UCCGD算符池筛选完毕!共入选{len(pick_index)}个,阈值是{threshold},具体index:\n{pick_index},\n\
+            入选率:{len(pick_index)/len(self.UCCGD_op)*100}%')
+        return pick_index
+    
+    def conclude_operator_pool(self):
+        #由于有算符重叠风险 因此需要进行去重
+        self.UCCD_index = self.pick_UCCD_op(threshold=1e-15)
+        self.UCCGD_index = self.pick_UCCGD_op(threshold=1e-15)
+        for i in self.UCCD_index:
+            if self.UCCD_op[i] in self.UCCGD_op:
+                self._logger2.info()
+        self.UCCD_OP_index = [i for i in self.UCCD_index if self.UCCD_op[i] not in self.UCCGD_op]
+        self.UCCGD_OP_index = [i for i in self.UCCGD_index if self.UCCGD_op[i] not in self.UCCD_op]
+        self._logger2.info(f'正在检验是否有选中的UCCD&UCCGD算符是否有重叠..')
+        if len(self.UCCD_index)!=len(self.UCCD_OP_index) and len(self.UCCGD_index)!=len(self.UCCGD_OP_index):
+            self._logger2.info("算符确实有重叠!")
+        else:
+            self._logger2.info("算符没有重叠!")
+        self.final_operator_pool = [self.UCCD_instrcution[i] for i in self.UCCD_OP_index ]
+        self.final_operator_pool.extend([self.UCCGD_instrcution[i] for i in self.UCCGD_OP_index])
+            
+        
+            
+            
+            
+            
