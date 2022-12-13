@@ -353,19 +353,10 @@ class MyG_AdaotVQE():
         #由于有算符重叠风险 因此需要进行去重
         self.UCCD_index = self.pick_UCCD_op(threshold=1e-15)
         self.UCCGD_index = self.pick_UCCGD_op(threshold=1e-15)
-        for i in self.UCCD_index:
-            if self.UCCD_op[i] in self.UCCGD_op:
-                self._logger2.info()
-        self.UCCD_OP_index = [i for i in self.UCCD_index if self.UCCD_op[i] not in self.UCCGD_op]
-        self.UCCGD_OP_index = [i for i in self.UCCGD_index if self.UCCGD_op[i] not in self.UCCD_op]
-        self._logger2.info(f'正在检验是否有选中的UCCD&UCCGD算符是否有重叠..')
-        if len(self.UCCD_index)!=len(self.UCCD_OP_index) and len(self.UCCGD_index)!=len(self.UCCGD_OP_index):
-            self._logger2.info("算符确实有重叠!")
-        else:
-            self._logger2.info("算符没有重叠!")
-        self.final_operator_pool = [self.UCCD_instrcution[i] for i in self.UCCD_OP_index ]
-        self.final_operator_pool.extend([self.UCCGD_instrcution[i] for i in self.UCCGD_OP_index])
-            
+        self.operator_pool_femonic_op = [self.UCCD_op[i] for i in self.UCCD_index]
+        tmp = [self.UCCGD_op[i] for i in self.UCCGD_index if self.UCCGD_op[i] not in self.operator_pool_femonic_op]
+        self._logger2.info(f'UCCGD_index的入选个数为{len(tmp)},是否有筛掉的:{len(tmp)==len(self.UCCGD_index)}')
+        self.operator_pool_femonic_op.extend(tmp)    
         
             
             
