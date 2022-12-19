@@ -359,6 +359,13 @@ class MyG_AdaotVQE():
         self.operator_pool_femonic_op.extend(tmp)    
         
             
-            
+class QubitAdapt(MyAdaptVQE):
+    def __init__(self, ES_problem: ElectronicStructureProblem,custom_operation_pool=None) -> None:
+        super().__init__(ES_problem: ElectronicStructureProblem,custom_operation_pool=None)
+        pass
+    
+
+   
+        
             
             
