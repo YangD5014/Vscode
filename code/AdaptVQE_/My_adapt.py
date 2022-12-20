@@ -360,9 +360,54 @@ class MyG_AdaotVQE():
         
             
 class QubitAdapt(MyAdaptVQE):
-    def __init__(self, ES_problem: ElectronicStructureProblem,custom_operation_pool=None) -> None:
-        super().__init__(ES_problem: ElectronicStructureProblem,custom_operation_pool=None)
+    def __init__(self, ES_problem: ElectronicStructureProblem) -> None:
+        self.converter = QubitConverter(JordanWignerMapper())
+        self.es_problem = ES_problem
+        self.init_state_hf = HartreeFock(num_particles=self.es_problem.num_particles,
+                                         num_spatial_orbitals=self.es_problem.num_spatial_orbitals,
+                                         qubit_converter=self.converter)
+        self.n_qubit = self.init_state_hf.num_qubits
+        uccsd = UCCSD(qubit_converter=self.converter,
+                      num_particles=self.es_problem.num_particles,
+                      num_spatial_orbitals=self.es_problem.num_spatial_orbitals,
+                      initial_state=self.init_state_hf,
+                      generalized=False  # 如果设为True ==> UCCGSD G=generalized
+                      )
+        self.uccop = [self.converter.convert(i) for i in uccsd.excitation_ops()]
+        self.uccop_dict = [self.pauliOperator2Dict(pauliOperator=i) for i in self.uccop]
+        self.qubit_pool_init()
+
+        
+    @staticmethod
+    def pauliOperator2Dict(pauliOperator):
+        paulis = pauliOperator.to_pauli_op().oplist
+        paulis_dict = {}
+        for x in paulis:
+            if x.coeff == 0.0:
+                continue
+            label = x.primitive.to_label()
+            coeff = x.coeff
+            paulis_dict[label] = coeff
+
+        return paulis_dict
+    @staticmethod
+    def random_pick():
         pass
+    
+    def qubit_pool_init(self):
+        tmp = [list(i) for i in self.uccop_dict]
+        self.paulistring_withz=[]
+        for i in tmp:
+            if len(i)==2:
+                i.pop()
+            elif len(i)==8:
+                del i[4:8]
+            self.paulistring_withz.append(i)
+        self.paulistring_withoutz = [k.replace('Z','I')  for i in self.paulistring_withz for k in i] 
+        
+        
+
+        
     
 
    
