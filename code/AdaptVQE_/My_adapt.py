@@ -9,8 +9,11 @@ from qiskit.algorithms.minimum_eigensolvers import VQE
 from qiskit.algorithms.optimizers import SLSQP
 from qiskit.circuit.library import EvolvedOperatorAnsatz
 from qiskit.opflow import StateFn, CircuitStateFn
+from qiskit.opflow.primitive_ops import PauliOp
 from qiskit.circuit import QuantumCircuit
+from qiskit.circuit.library import EvolvedOperatorAnsatz
 from copy import deepcopy
+from qiskit.quantum_info import Pauli
 from qiskit.circuit import ParameterVector, Parameter
 from qiskit.primitives import Estimator  # 意味着本地进行的模拟
 import numpy as np
@@ -222,6 +225,30 @@ class MyAdaptVQE(object):
         logger.info(f'下一个算符:第{np.argmax(value)}项被选定,此项梯度最大')
         # return result
         return bound_circuit
+    def run_tmp(self):
+        optimal_point= [0.0]
+        self.slover.ansatz = None
+        start_time = time.time()
+        logger.info(
+            f'------------第{self.iteration_index}轮正在进行中--------------')
+        logger.info(f'**目前已有{self._already_pick_index}**')
+        qc = QuantumCircuit(self.n_qubit)
+        qc.append(self.init_state_hf, range(self.n_qubit))
+        for index, k in enumerate(self.adapt_ansatz):
+                qc.append(k, range(self.n_qubit))
+
+            # ------------------------------------------------------------
+            # 每一轮的优化
+        self.slover.ansatz = qc
+        self.slover.initial_point = np.zeros(qc.num_parameters)
+        logger.info(f'initial point是:{self.slover.initial_point}')
+        vqe_result = self.slover.compute_minimum_eigenvalue(self.hamiltonian)
+        optimal_parameter = vqe_result.optimal_point.tolist()
+        logger.info(f'第{self.iteration_index}轮的优化结果是：{optimal_parameter}')
+        bound_circuit = qc.bind_parameters(optimal_parameter)
+        self.pick_next_operator(bound_circuit=bound_circuit)
+        optimal_point = optimal_parameter.append(0.0)
+        self.iteration_index += 1
     
     def run_slover(self):
         optimal_point= [0.0]
@@ -359,14 +386,17 @@ class MyG_AdaotVQE():
         self.operator_pool_femonic_op.extend(tmp)    
         
             
-class QubitAdapt(MyAdaptVQE):
+class QubitAdapt(object):
+    #qubit-adapt 从UCCSD 以及UCCGSD(未实现)的Pauli string中提取算符作为qubit pool
     def __init__(self, ES_problem: ElectronicStructureProblem) -> None:
+        self.logger_init() #初始化日志
         self.converter = QubitConverter(JordanWignerMapper())
         self.es_problem = ES_problem
         self.init_state_hf = HartreeFock(num_particles=self.es_problem.num_particles,
                                          num_spatial_orbitals=self.es_problem.num_spatial_orbitals,
                                          qubit_converter=self.converter)
         self.n_qubit = self.init_state_hf.num_qubits
+        self.hamiltonian = self.converter.convert(ES_problem.hamiltonian.second_q_op())
         uccsd = UCCSD(qubit_converter=self.converter,
                       num_particles=self.es_problem.num_particles,
                       num_spatial_orbitals=self.es_problem.num_spatial_orbitals,
@@ -376,6 +406,13 @@ class QubitAdapt(MyAdaptVQE):
         self.uccop = [self.converter.convert(i) for i in uccsd.excitation_ops()]
         self.uccop_dict = [self.pauliOperator2Dict(pauliOperator=i) for i in self.uccop]
         self.qubit_pool_init()
+        self.adapt_ansatz=[]
+        self.converageflag = False
+        self.commutors = [1j*(self.hamiltonian@i - i@self.hamiltonian)
+                          for i in self.qubit_pool_withoutz]
+        self._already_pick_index = []
+        self.slover = VQE(estimator=Estimator(),ansatz=self.init_state_hf,optimizer=SLSQP())
+        self.adapt_ansatz.append(self.circuit_measurement_first())
 
         
     @staticmethod
@@ -403,7 +440,114 @@ class QubitAdapt(MyAdaptVQE):
             elif len(i)==8:
                 del i[4:8]
             self.paulistring_withz.append(i)
-        self.paulistring_withoutz = [k.replace('Z','I')  for i in self.paulistring_withz for k in i] 
+        self.paulistring_withoutz = [k.replace('Z','I')  for i in self.paulistring_withz for k in i]
+        self.qubit_pool_withoutz = [PauliOp(primitive=Pauli(data=i),coeff=1j) for i in self.paulistring_withoutz]
+        self.paulistring_withoutz_instruction = [EvolvedOperatorAnsatz(operators=PauliOp(Pauli(data=i),coeff=1j),name='Term_'+str(index),parameter_prefix="Qubit_"+str(index)).to_instruction()  \
+                                                 for index,i in enumerate(self.paulistring_withoutz)]
+        self.logger.info(f'Qubit pool 共有{len(self.qubit_pool_withoutz)}个')
+        
+        
+    @staticmethod
+    # 参数是 每一轮求得的梯度的最大值
+    def check_gradient_converge(value, criterion: float = 1e-3) -> bool:
+        converge = value[np.argmax(value)]
+        if converge > criterion:
+            logger.info(f'没有达到收敛标准,标准为{criterion},当前值为{converge}')
+            return False
+        else:
+            logger.info(f'达到收敛标准,标准为{criterion},当前值为{converge}')
+            return True
+    
+    #挑选下一块
+    def pick_next_operator(self, bound_circuit: QuantumCircuit):
+        self.logger.info(f'目前这是第{self.iteration_index}轮,正在准备挑选下一块算符,并验证是否收敛...')
+        estimator = Estimator()
+        job = estimator.run(
+            circuits=[bound_circuit]*len(self.commutors), observables=self.commutors)
+        result = job.result()
+        value = np.abs(result.values)
+        self.converageflag = self.check_gradient_converge(value=value)
+        if self.converageflag == False:
+            self.logger.info(f'目前还没有达到收敛！')
+            k = np.argmax(value)
+            self.logger.info(f'第{self.iteration_index}轮中梯度最大项为第{k}项,已被选入算符池...')
+            self._already_pick_index.append(k)
+            # print(f'第{self.iteration_index}轮中梯度最大项为第{k}项,梯度最小项为第{np.argmin(value)}项')
+            self.adapt_ansatz.append(self.excitation_pool_instruction[k])
+            return result.values
+        else:
+            self.logger.info(f'已经达到收敛！算法终止！')
+            # print(f'第{self.iteration_index}轮已经收敛！')
+    
+    def logger_init(self):
+        # 定义记录器对象
+        self.logger = logging.getLogger('Qubit_AdaptVQE')
+        # 设置记录器级别
+        self.logger.setLevel(logging.DEBUG)
+        # 设置过滤器 只有被选中的可以记录
+        myfilter = logging.Filter('Qubit_AdaptVQE')
+        # 定义处理器-文件处理器
+        filehandler = logging.FileHandler(filename='./Qubit_AdaptVQE.log', mode='a')
+        filehandler.addFilter(myfilter)
+        formatter = logging.Formatter('%(asctime)s-%(levelname)s-\n%(message)s')
+        filehandler.setFormatter(formatter)
+        # 定义处理器-控制台处理器
+        concolehander = logging.StreamHandler()
+        concolehander.setLevel(logging.INFO)
+        # 记录器绑定handerler
+        self.logger.addHandler(filehandler)
+        self.logger.addHandler(concolehander)
+        
+    
+    def circuit_measurement_first(self):
+        self.logger.info('开始初始化:挑选第一个算符...')
+        circuits = []
+        for i in self.paulistring_withoutz_instruction:
+            n = self.init_state_hf.num_qubits
+            qc = QuantumCircuit(n)
+            init_state = deepcopy(self.init_state_hf)
+            qc.append(init_state, range(n))
+            circuits.append(qc)
+
+        estimator = Estimator()
+        job = estimator.run(circuits=circuits, observables=self.commutors)
+        result = job.result()
+        value = np.abs(result.values)
+        k = np.argmax(value)
+        self.logger.info(f'初始化结果:第{np.argmax(value)}项被选定,此项梯度最大')
+        self._already_pick_index.append(k)
+        # print(f'初始化结果:第{np.argmax(value)}项被选定，梯度最大,梯度最小的是第{np.argmin(value)}项')
+        self.iteration_index = 1
+        return self.paulistring_withoutz_instruction[k]
+    
+    def run_slover(self):
+        optimal_point= [0.0]
+        while(self.converageflag==False):
+            self.slover.ansatz =None
+            start_time =time.time()
+            self.logger.info(f'------------第{self.iteration_index}轮正在进行中--------------')
+            self.logger.info(f'**目前已有{self._already_pick_index}**')
+            qc = QuantumCircuit(self.n_qubit)
+            qc.append(self.init_state_hf, range(self.n_qubit))
+            for index, k in enumerate(self.adapt_ansatz):
+                qc.append(k, range(self.n_qubit))
+                
+            # ------------------------------------------------------------
+            # 每一轮的优化
+            self.slover.ansatz = qc
+            #self.slover.initial_point = np.zeros(qc.num_parameters)
+            self.logger.info(f'initial point是:{self.slover.initial_point}')
+            vqe_result = self.slover.compute_minimum_eigenvalue(operator=self.hamiltonian)
+            optimal_parameter = vqe_result.optimal_point.tolist()
+            self.logger.info(f'第{self.iteration_index}轮的优化结果是：{optimal_parameter}')
+            bound_circuit = qc.bind_parameters(optimal_parameter)
+            self.pick_next_operator(bound_circuit=bound_circuit)
+            optimal_point = optimal_parameter.append(0.0)
+            self.iteration_index += 1
+        self.logger.info(
+            f'===FINAL OUTCOME===\nOrder={self._already_pick_index}\nOptimal value={optimal_parameter}\nTotal iteration={self.iteration_index-1}')
+
+        
         
         
 
