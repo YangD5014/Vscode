@@ -189,30 +189,10 @@ class QubitAdapt(object):
         # print(f'第{parameterized_circuit.num_parameters+1}轮的参数优化结果为{optimize_result.x}')
         return optimize_result.x
     
-    def run(self):
-        while(self.converageflag == False):
-            start_time = time.time()
-            self.logger.info(
-                f'-----------------第{self.iteration_index}轮正在进行中-----------------------')
-            self.logger.info(f'**目前已有{self._already_pick_index}**')
-            qc = QuantumCircuit(self.n_qubit)
-            qc.append(self.init_state_hf, range(self.n_qubit))
-            for index, k in enumerate(self.adapt_ansatz):
-                qc.append(k, range(self.n_qubit))
-            # ------------------------------------------------------------
-            # 每一轮的优化
-            optimal_parameter = self.parameter_optimizer(
-                parameterized_circuit=qc)
-            # print(f'第{self.iteration_index}轮的优化结果是：{optimal_parameter}')
-            bound_circuit = qc.bind_parameters(optimal_parameter)
-            self.pick_next_operator(bound_circuit=bound_circuit)
-            self.iteration_index += 1
-            self.logger.info(f'本轮用时{time.time()-start_time}')
-        self.logger.info(
-            f'===FINAL OUTCOME===\nOrder={self._already_pick_index}\nOptimal value={optimal_parameter}\nTotal iteration={self.iteration_index-1}')
         
     def run_slover(self):
-        optimal_point= [0.0]
+        optimal_parameter= [0.0]
+        #vqe_result=[]
         while(self.converageflag==False):
             self.slover.ansatz =None
             start_time =time.time()
@@ -226,18 +206,22 @@ class QubitAdapt(object):
             # ------------------------------------------------------------
             # 每一轮的优化
             self.slover.ansatz = qc
-            self.slover.initial_point = np.zeros(qc.num_parameters)
+            #self.slover.initial_point = np.zeros(qc.num_parameters)
+            if len(optimal_parameter)==1:
+                self.slover.initial_point=[0.0]
+            else:
+                self.slover.initial_point=optimal_parameter
             self.logger.info(f'initial point是:{self.slover.initial_point}')
-            vqe_result = self.slover.compute_minimum_eigenvalue(self.hamiltonian)
-            optimal_parameter = vqe_result.optimal_point.tolist()
+            self.vqe_result = self.slover.compute_minimum_eigenvalue(self.hamiltonian)
+            optimal_parameter = self.vqe_result.optimal_point.tolist()
             self.logger.info(f'第{self.iteration_index}轮的优化结果是：{optimal_parameter}')
             bound_circuit = qc.bind_parameters(optimal_parameter)
             self.pick_next_operator(bound_circuit=bound_circuit)
-            optimal_point = optimal_parameter.append(0.0)
+            optimal_parameter.append(0.0)
             self.iteration_index += 1
         self.logger.info(
             f'===FINAL OUTCOME===\nOrder={self._already_pick_index}\nOptimal value={optimal_parameter}\nTotal iteration={self.iteration_index-1}')
-        return vqe_result
+        return self.vqe_result.optimal_value
 
 
     
